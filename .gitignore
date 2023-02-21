@@ -1,3 +1,2 @@
 .env
 /news/scheduler.py
-/news/tasks.py
