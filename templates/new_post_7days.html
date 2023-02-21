@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Уважаемый пользователь!</h2>
+    <p>На нашем сайте за прошедшую неделю появились новые публикации по интересующей Вас категории:</p>
+    <hr>
+    <table>
+            <tr><b>
+                <td>Заголовок</td>
+                <td>Дата публикации</td>
+                <td>Ссылка на публикацию</td>
+            </b></tr>
+            {% for post in posts %}
+            <tr>
+                <td>{{ post.title }}</td>
+                <td>{{ post.get_public_date }}</td>
+                <td><a href='http://127.0.0.1:8000/news/{{ post.id }}'>{{ post.text|truncatechars:21 }}</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    <hr>
+
+</body>
+</html>

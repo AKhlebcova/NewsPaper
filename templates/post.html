@@ -1,0 +1,25 @@
+{% extends 'flatpages/default.html'%}
+{% load custom_filters %}
+{% block title %}
+Post
+{% endblock title %}
+
+
+{% block content %}
+<!--{% if is_not_subscriber %}-->
+<!--<button><a href='upgrade/'>Подписаться на эту категорию!</a></button>-->
+<!--{% endif %}-->
+<h3>{{ post.title|censor }}</h3>
+<hr>
+{{ post.text|linebreaks|censor }}<br>
+<br>
+<h5>Автор: {{ post.author.user.username }}</h5><br>
+<h5>Дата публикации: {{ post.public_date|date:'d.m.Y' }}</h5><br>
+<h5>Категории:<br>
+    <br>
+    {% for сategory in postcategories %}
+    <ul><a href="/news/category/{{ сategory.id }}" >{{ сategory }}</ul>
+            {% endfor %}</h5>
+
+
+{% endblock content %}

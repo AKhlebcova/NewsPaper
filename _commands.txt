@@ -1,0 +1,157 @@
+1.
+User.objects.create_user('Alina2018')
+User.objects.create_user('Ekaterina2017')
+User.objects.create_user('Vadim123')
+2.
+Author.objects.create(user_id=1)
+Author.objects.create(user_id=2)
+3.
+Category.objects.create(name_of_category = 'Биография')
+Category.objects.create(name_of_category = 'Культура')
+Category.objects.create(name_of_category = 'Природа')
+Category.objects.create(name_of_category = 'Архитектура')
+4.
+>>>Post.objects.create(author_id = 1, post_type = Post.article, title = 'Дом в пустыне на краю национального парка Джошуа-Три')
+>>>Post.objects.create(author_id = 1, post_type = Post.article, title = 'Норвежская крона: валюта как национальное достояние')
+>>>Post.objects.create(author_id = 2, post_type = Post.news, title = 'Мультимедийная выставка, посвященная творчеству Ван Гога')
+>>>Post.objects.create(author_id = 2, post_type = Post.article, title = '«В гармонии с природой» — 5 признаков современной органической архитектуры')
+
+5.
+PostCategory.objects.create(post_id = 1, category_id = 3)
+PostCategory.objects.create(post_id = 1, category_id = 4)
+PostCategory.objects.create(post_id = 2, category_id = 2)
+PostCategory.objects.create(post_id = 3, category_id = 2)
+PostCategory.objects.create(post_id = 4, category_id = 3)
+PostCategory.objects.create(post_id = 4, category_id = 4)
+6.
+Comment.objects.create(post_id = 1, user_id = 2, comment_text = 'Автор - молодец')
+Comment.objects.create(post_id = 2, user_id = 1, comment_text = 'А у нас на деньгах мертвые президенты')
+Comment.objects.create(post_id = 2, user_id = 3, comment_text = 'А у нас домики')
+Comment.objects.create(post_id = 3, user_id = 1, comment_text = 'Я пойду')
+Comment.objects.create(post_id = 4, user_id = 1, comment_text = 'Это я написала')
+Comment.objects.create(post_id = 4, user_id = 3, comment_text = 'Это никому не интресно')
+7.
+post1 = Post.objects.all()[0]
+post1.like_to_author()
+post1.like_to_author()
+post1.like_to_author()
+post1.dislike_to_author()
+
+post2 = Post.objects.all()[1]
+post2.like_to_author()
+post2.dislike_to_author()
+post2.dislike_to_author()
+
+post3 = Post.objects.all()[2]
+post3.like_to_author()
+post3.like_to_author()
+post3.like_to_author()
+
+post4 = Post.objects.all()[3]
+post4.dislike_to_author()
+post4.dislike_to_author()
+post4.like_to_author()
+
+
+comment1, comment2, comment3, comment4, comment5, comment6 = Comment.objects.all()
+comment1.like_to_user()
+comment1.like_to_user()
+comment1.like_to_user()
+comment2.dislike_to_user()
+comment2.dislike_to_user()
+comment2.dislike_to_user()
+comment3.like_to_user()
+comment3.like_to_user()
+comment4.dislike_to_user()
+comment4.dislike_to_user()
+comment4.dislike_to_user()
+comment5.like_to_user()
+comment5.like_to_user()
+comment5.dislike_to_user()
+comment6.dislike_to_user()
+
+
+8.
+au1, au2 = Author.objects.all()
+au1.update_rating()
+au2.update_rating()
+
+9.
+Author.objects.all().order_by('-user_rating').values('user__username', 'user_rating')[0]
+
+10.
+best_post = Post.objects.all().order_by('-post_rating').first()
+best_post.get_info
+
+
+11.
+best_post = Post.objects.all().order_by('-post_rating').first()
+Comment.objects.filter(post_id=best_post.id).all().values('comment_date', 'user__username', 'comment_rating', 'comment_text')
+
+
+
+Author.objects.create(user_id=3)
+Post.objects.create(author_id = 3, post_type = Post.news, title = 'Музей для города', text = '''OMA выиграли конкурс на проект реконструкции Египетского музея в Турине – самого старого в мире из посвященных культуре Страны пирамид.
+Туринский музей открылся в 1824, то есть в следующем году ему исполняется 200 лет. Конкурс приурочен к этой дате, однако успеют ли реализовать замысел архитекторов OMA к будущему году, не уточняется.''')
+Post.objects.create(author_id = 3, post_type = Post.news, title = 'Казаныш: лауреаты 2022', text = '''Представляем объекты и проекты, получившие гран-при и занявшие первые места в смотре архитектурно-строительного форума «Казаныш».
+В заключительный день архитектурно-строительного форума «Казаныш», который прошел в Казани в декабре, подвели итоги смотра-конкурса на лучший архитектурный объект в городе.
+В этом сезоне на смотр поступило 126 заявок от более чем 40 архитектурных и строительных компаний. Победителей и призеров определяли среди несогласованных проектов, согласованных, но нереализованных работ и реализованных объектов.
+Ниже – объекты и проекты, получившие гран-при и занявшие первые места.
+ Лучшая архитектурно-художественная подсветка. Гран-при
+Жилой комплекс «Atlantis Deluxe»
+Группа компаний «СМУ 88»
+Лучшее место общего пользования. Первое место
+Жилой комплекс «Палитра», решение первого этажа жилых домов 6.2, 6.3
+ООО «СУВАРХ»
+Авторский коллектив: Дамир Габайдуллин, Марат Каримуллин, Елена Галиаскарова
+Лучший жилой комплекс. Первое место
+Жилой комплекс «Одетте»
+ООО «Аксиом Архитект»
+Лучший объект коммерческой недвижимости. Гран-при
+Центр семейного отдыха по ул.Павлюхина в Казани
+ООО «СОЛЕВ»
+Авторский коллектив: Артур Айтбагин, Радик Валиахметов, Тимур Шигапов
+Лучший объект реновации. Гран-при
+Реконструкция комплекса зданий и территории бывшей фабрики «Спартак» в целях создания новой площадки ИТ-парк имени Башира Рамеева
+ГУП «Татинвестгражданпроект»
+Авторский коллектив: Елена Валеева, Дмитрий Маркелов, Роберт Хабиров, Адель Ахметов, Рамиль Сиразев, Полина Некрасова, Игорь Шашурин
+Лучший объект реновации. Первое место
+Детская музыкальная школа №2
+МКУ «Администрация Кировского и Московского районов Исполнительного комитета муниципального образования города Казани»
+Авторский коллектив: Руслан Гильманов, Игорь Портнов
+Лучший паркинг. Первое место
+Проект многоуровневого паркинга с помещениями обслуживания на 1-ом этаже в ПК-5 жилого комплекса «Мой ритм»
+OFFICE DE
+Авторский коллектив: Д.А. Куликов, Е.Е. Жирков''')
+Post.objects.create(author_id = 3, post_type = Post.news, title = 'Экотропа у Дворца творчества в Омске', text = '''В Омске благоустроят территорию около Дворца творчества. Не исключено, что там появятся амфитеатр и ландшафтный сад. На 8 ноября в Центре компетенций по вопросам городской среды планируется провести заседание архитектурного совета и обсудить на нем концепцию благоустройства.
+Автор идеи — архитектор Дмитрий Смирнов. Он предложил разделить территорию на несколько зон и оборудовать экотропу, ландшафтный сад, амфитеатр, воркаут-площадку, детскую площадку, установить качели, лежаки, перголу и эстраду.
+Неработающий бассейн могут переоборудовать под цветник и высадить туда многолетние травы. Встроенные светильники расположат с шагом в 6 м, чтобы акцентировать масштаб, пишет ИА «ОМСКРЕГИОН».
+Также предлагается расширить парковку до 60 машино-мест, установить пандусы, привести в порядок барельеф «Детство», скульптуру «Пионеры на марше» и мозаику «Солнечные часы». Кроме того, по задумке автора, на площади перед Дворцом творчества могут использовать активный рисунок мощения, чтобы оживить монотонность твердых покрытий, отмечает ИА «Город55».
+Ранее, 27 октября, сообщалось, что в Омске «зеленая комиссия» отклонила часть заявок на снос старовозрастных деревьев на набережной Тухачевского, улицах Рабиновича и Интернациональной. Работы перенесли на следующий год. При этом комиссия требует соблюсти основное условие — высадить 80 деревьев на Интернациональной и около 30 деревьев на улице Рабиновича и набережной Тухачевского.''')
+Post.objects.create(author_id = 3, post_type = Post.news, title = 'Инструмент Уэбба NIRISS отключен', text = '''В воскресенье, 15 января, у прибора NIRISS (Near Infrared Imager and Slitless Spectrograph) космического аппарата "Джеймс Уэбб" произошла задержка связи, в результате чего его программное обеспечение вышло из строя. В настоящее время прибор все еще находится в автономном режиме и поэтому недоступен для научных наблюдений, которые будут перенесены. НАСА и Канадское космическое агентство (CSA) работают над определением и последующим устранением первопричины задержки. В настоящее время (29 января) нет никаких признаков возможного повреждения оборудования. Космическое агентство подтвердило, что все остальные научные приборы, установленные на телескопе, находятся в хорошем состоянии.''')
+Post.objects.create(author_id = 3, post_type = Post.news, title = 'Исследователи определили тип астероида, который очень сложно уничтожить', text = '''26 сентября 2022 года зонд НАСА Double Asteroid Redirection Test (DART) намеренно врезался в астероид Диморфос. Цель? Оценить возможность отклонения кинетического удара в случае, если крупный астероид направляется прямо к Земле. Миссия прошла успешно. Но не стоит расслабляться: ученые обнаружили тип астероида, который будет особенно трудно уничтожить, если не предусмотреть возможность отклонения. Международная группа исследователей под руководством Университета Кертина в Австралии проанализировала некоторые частицы реголита с астероида Итокава. Образцы были взяты в 2005 году космическим аппаратом "Хаябуса" агентства JAXA, который вернул образцы на Землю в июне 2010 года. Первые изображения астероида длиной 600 метров показали, что он покрыт каменными осколками, что говорит о том, что это не монолитный астероид, а скорее глыба обломков. Изучение нескольких зерен пыли, собранных с поверхности, подтвердило теорию. "В отличие от монолитных астероидов, Итокава не является единым блоком породы, а принадлежит к семейству мусорных куч, что означает, что он полностью состоит из рыхлых пород и блоков, причем почти половину объема составляет пустое пространство", — объясняет профессор Фред Журдан из Школы наук о Земле и планетах Университета Кертина и первый автор исследования. Этот тип астероидов встречается в Солнечной системе гораздо чаще, чем считалось ранее, и его трудно уничтожить путем столкновения.''')
+
+PostCategory.objects.create(post_id = 11, category_id = 4)
+PostCategory.objects.create(post_id = 11, category_id = 2)
+PostCategory.objects.create(post_id = 12, category_id = 3)
+PostCategory.objects.create(post_id = 12, category_id = 4)
+PostCategory.objects.create(post_id = 13, category_id = 5)
+PostCategory.objects.create(post_id = 14, category_id = 5)
+PostCategory.objects.create(post_id = 7, category_id = 4)
+PostCategory.objects.create(post_id = 8, category_id = 2)
+PostCategory.objects.create(post_id = 8, category_id = 4)
+PostCategory.objects.create(post_id = 9, category_id = 4)
+PostCategory.objects.create(post_id = 10, category_id = 3)
+PostCategory.objects.create(post_id = 10, category_id = 4)
+PostCategory.objects.create(post_id = 11, category_id = 5)
+PostCategory.objects.create(post_id = 12, category_id = 5)
+PostCategory.objects.create(post_id = 13, category_id = 5)
+PostCategory.objects.create(post_id = 14, category_id = 5)
+
+
+
+
+
+
+
+

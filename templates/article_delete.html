@@ -1,0 +1,23 @@
+{% extends 'flatpages/default.html'%}
+{% block title %}
+Delete
+{% endblock title %}
+
+{% block content %}
+{% if post.post_type == 'at' %}
+    <h1>Удаление статьи</h1>
+    <hr>
+    <form action="" method="post">
+        {% csrf_token %}
+      <p> Подтвердить удаление статьи:</p>
+          <p>'{{ object.title }}'?</p>
+        <input type="submit" value="Agree" />
+
+    </form>
+    {% else %}
+        <h2>Выбранная Вами публикация не является статьей: перейдите по <a href='/news/{{ post.id }}/delete/'>ССЫЛКЕ</a> для ее удаления.</h2>
+    {% endif %}
+
+
+
+{% endblock content %}
