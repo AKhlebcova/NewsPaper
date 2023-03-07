@@ -1,0 +1,23 @@
+07.03.2023 08:33:13 INFO autoreload: Watching for file changes with StatReloader
+07.03.2023 08:33:15 ERROR views: Test_dj_error
+07.03.2023 08:33:15 INFO views: Test_dj_info
+07.03.2023 08:33:15 CRITICAL views: Test_dj_critical
+07.03.2023 08:33:15 WARNING views: Test_dj_warning
+07.03.2023 09:06:44 INFO autoreload: /Users/annakhlebtsova/PycharmProjects/Project_dir/NewsPaper/NewsPaper/settings.py changed, reloading.
+07.03.2023 09:06:45 INFO autoreload: Watching for file changes with StatReloader
+07.03.2023 09:08:19 INFO autoreload: /Users/annakhlebtsova/PycharmProjects/Project_dir/NewsPaper/NewsPaper/settings.py changed, reloading.
+07.03.2023 09:08:20 INFO autoreload: Watching for file changes with StatReloader
+07.03.2023 09:59:45 INFO autoreload: /Users/annakhlebtsova/PycharmProjects/Project_dir/NewsPaper/NewsPaper/settings.py changed, reloading.
+07.03.2023 09:59:45 INFO autoreload: Watching for file changes with StatReloader
+07.03.2023 09:59:55 INFO autoreload: Watching for file changes with StatReloader
+07.03.2023 10:00:37 ERROR views: Test_dj_error
+07.03.2023 10:00:37 INFO views: Test_dj_info
+07.03.2023 10:00:37 CRITICAL views: Test_dj_critical
+07.03.2023 10:00:37 WARNING views: Test_dj_warning
+07.03.2023 10:01:40 INFO autoreload: /Users/annakhlebtsova/PycharmProjects/Project_dir/NewsPaper/NewsPaper/settings.py changed, reloading.
+07.03.2023 10:01:40 INFO autoreload: Watching for file changes with StatReloader
+07.03.2023 10:01:53 ERROR views: Test_dj_error
+07.03.2023 10:01:53 INFO views: Test_dj_info
+07.03.2023 10:01:53 CRITICAL views: Test_dj_critical
+07.03.2023 10:01:53 WARNING views: Test_dj_warning
+07.03.2023 10:04:38 INFO autoreload: /Users/annakhlebtsova/PycharmProjects/Project_dir/NewsPaper/NewsPaper/settings.py changed, reloading.

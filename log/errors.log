@@ -1,0 +1,8 @@
+07.03.2023 10:35:14 CRITICAL Test_dj_RQ_critical /Users/annakhlebtsova/PycharmProjects/Project_dir/NewsPaper/news/views.py None
+07.03.2023 10:35:16 ERROR Test_dj_rq_error /Users/annakhlebtsova/PycharmProjects/Project_dir/NewsPaper/news/views.py None
+07.03.2023 10:35:18 CRITICAL Test_dj_SERVER_critical /Users/annakhlebtsova/PycharmProjects/Project_dir/NewsPaper/news/views.py None
+07.03.2023 10:35:20 ERROR Test_dj_SERVER_error /Users/annakhlebtsova/PycharmProjects/Project_dir/NewsPaper/news/views.py None
+07.03.2023 10:35:21 CRITICAL Test_dj_TEMLATE_critical /Users/annakhlebtsova/PycharmProjects/Project_dir/NewsPaper/news/views.py None
+07.03.2023 10:35:21 ERROR Test_dj_TEMLATE_error /Users/annakhlebtsova/PycharmProjects/Project_dir/NewsPaper/news/views.py None
+07.03.2023 10:35:21 CRITICAL Test_dj_DB_BACK_critical /Users/annakhlebtsova/PycharmProjects/Project_dir/NewsPaper/news/views.py None
+07.03.2023 10:35:21 ERROR Test_dj_DB_BACK_error /Users/annakhlebtsova/PycharmProjects/Project_dir/NewsPaper/news/views.py None

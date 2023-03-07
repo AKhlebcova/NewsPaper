@@ -1,3 +1,8 @@
+from datetime import datetime
+from django.core.cache import cache
+from locale import format_string
+
+from django.http import HttpResponse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from .models import Post, UserSubscribers, PostCategory, Category
@@ -8,6 +13,54 @@ from django.urls import reverse_lazy
 from django.shortcuts import redirect
 from django.contrib.auth.models import Group
 from django.contrib.auth.decorators import login_required
+import logging
+
+
+def log(request):
+    logger1 = logging.getLogger("django")
+    logger1.error("Test_dj_error")
+    logger1.debug('Test_dj_debug')
+    logger1.info('Test_dj_info')
+    logger1.critical('Test_dj_critical')
+    logger1.warning('Test_dj_warning')
+
+    logger2 = logging.getLogger('django.request')
+    logger2.debug('Test_dj_RQ_debug')
+    logger2.info('Test_dj_RQ_info')
+    logger2.critical('Test_dj_RQ_critical')
+    logger2.warning('Test_dj_RQ_warning')
+    logger2.error("Test_dj_rq_error")
+
+    logger3 = logging.getLogger('django.server')
+    logger3.debug('Test_dj_SERVER_debug')
+    logger3.info('Test_dj_SERVER_info')
+    logger3.critical('Test_dj_SERVER_critical')
+    logger3.warning('Test_dj_SERVER_warning')
+    logger3.error("Test_dj_SERVER_error")
+
+    logger4 = logging.getLogger('django.template')
+    logger4.debug('Test_dj_TEMLATE_debug')
+    logger4.info('Test_dj_TEMLATE_info')
+    logger4.critical('Test_dj_TEMLATE_critical')
+    logger4.warning('Test_dj_TEMLATE_warning')
+    logger4.error("Test_dj_TEMLATE_error")
+
+    logger5 = logging.getLogger('django.db.backends')
+    logger5.debug('Test_dj_DB_BACK_debug')
+    logger5.info('Test_dj_DB_BACK_info')
+    logger5.critical('Test_dj_DB_BACK_critical')
+    logger5.warning('Test_dj_DB_BACK_warning')
+
+    logger5.error("Test_dj_DB_BACK_error")
+
+    logger6 = logging.getLogger('django.security')
+    logger6.debug('Test_dj_SECURITY_debug')
+    logger6.info('Test_dj_SECURITY_info')
+    logger6.critical('Test_dj_SECURITY_critical')
+    logger6.warning('Test_dj_SECURITY_warning')
+    logger6.error("Test_dj_SECURITY_error")
+
+    return HttpResponse('!!!!!')
 
 
 class PostsList(ListView):
@@ -36,6 +89,16 @@ class CategoryPostList(ListView):
         contex = super().get_context_data(**kwargs)
         contex['category'] = self.category
         return contex
+
+
+def start(request):
+    num_visits = request.session.get('num_visits', 0)
+    request.session['num_visits'] = num_visits + 1
+    last_visit_date = request.session.get('last_visit_date', datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S'))
+    request.session['last_visit_date'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    output = "<h2>ВСЕГО ВЫ БЫЛИ НА ЭТОЙ СТРАНИЦЕ - {0} РАЗ,</h2><h2>ДАТА ПОСЛЕДНЕГО ПОСЕЩЕНИЯ - {1}</h2>".format(
+        num_visits, last_visit_date)
+    return HttpResponse(output)
 
 
 class IndexView(LoginRequiredMixin, TemplateView):
@@ -92,6 +155,15 @@ class PostDetail(DetailView):
         contex = super().get_context_data(**kwargs)
         contex['postcategories'] = self.object.category.all()
         return contex
+
+    def get_object(self, *args, **kwargs):
+        publication = cache.get(f'post-{self.kwargs["id"]}', None)
+        # print(publication)
+        if not publication:
+            publication = super().get_object(queryset=self.queryset)
+            cache.set(f'post-{self.kwargs["id"]}', publication)
+            # print(publication)
+        return publication
 
 
 class ArticleCreate(PermissionRequiredMixin, CreateView):

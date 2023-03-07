@@ -1,0 +1,5 @@
+07.03.2023 10:35:21 DEBUG views: Test_dj_SECURITY_debug
+07.03.2023 10:35:21 INFO views: Test_dj_SECURITY_info
+07.03.2023 10:35:21 CRITICAL views: Test_dj_SECURITY_critical
+07.03.2023 10:35:21 WARNING views: Test_dj_SECURITY_warning
+07.03.2023 10:35:21 ERROR views: Test_dj_SECURITY_error

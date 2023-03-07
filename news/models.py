@@ -1,3 +1,6 @@
+import time
+from django.core.cache import cache
+
 from django.db import models
 from django.urls import reverse
 from django import forms
@@ -65,6 +68,13 @@ class Post(models.Model):
     text = models.CharField(max_length=3000)
     post_rating = models.IntegerField(default=0)
 
+    def get_categories(self):
+        cat = []
+        post_categories = self.category.all().values_list('name_of_category', flat=True)
+        for i in post_categories:
+            cat.append(i)
+        return cat
+
     # def __str__(self):
     #     username = User.objects.filter(id=self.author.user_id).first().username
     #     return f'{self.title}' \
@@ -101,16 +111,21 @@ class Post(models.Model):
     def get_absolute_url(self):
         return reverse('post_detail', args=[str(self.id)])
 
-    # def __str__(self):
-    #     return f'{self.title}'
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        # time.sleep(30)
+        cache.delete(f'post-{self.id}')
+
+    def __str__(self):
+        return f'{self.title}'
 
 
 class PostCategory(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
 
-    def __str__(self):
-        return self.category
+    # def __str__(self):
+    #     return self.category
 
 
 class Comment(models.Model):
